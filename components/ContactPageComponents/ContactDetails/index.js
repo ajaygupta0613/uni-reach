@@ -17,7 +17,9 @@ const ContactDetails = () => {
               alt="Vector SVG"
               className={styles.arrow_vector__svg}
             />
-            <h2 className={styles.about__section__title}>Our Services</h2>
+            <h2 className={styles.about__section__title}>
+              Book a call with us today
+            </h2>
           </div>
           <div className={styles.contact__info}>
             <ul className={styles.ul__links}>
