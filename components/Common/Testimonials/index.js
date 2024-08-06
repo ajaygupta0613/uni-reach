@@ -153,35 +153,35 @@ const Testimonials = () => {
                       </div>
                       <div className={styles.testimonial_ratting}>
                         <Image
-                          src={`/home/star-fill.svg`}
+                          src={`/home/Star-fill.svg`}
                           width={100}
                           height={100}
                           alt="Vector SVG"
                           className={styles.testimonial_ratting_fill}
                         />
                         <Image
-                          src={`/home/star-fill.svg`}
+                          src={`/home/Star-fill.svg`}
                           width={100}
                           height={100}
                           alt="Vector SVG"
                           className={styles.testimonial_ratting_fill}
                         />
                         <Image
-                          src={`/home/star-fill.svg`}
+                          src={`/home/Star-fill.svg`}
                           width={100}
                           height={100}
                           alt="Vector SVG"
                           className={styles.testimonial_ratting_fill}
                         />
                         <Image
-                          src={`/home/star-fill.svg`}
+                          src={`/home/Star-fill.svg`}
                           width={100}
                           height={100}
                           alt="Vector SVG"
                           className={styles.testimonial_ratting_fill}
                         />
                         <Image
-                          src={`/home/star-empty.svg`}
+                          src={`/home/Star-empty.svg`}
                           width={100}
                           height={100}
                           alt="Vector SVG"
