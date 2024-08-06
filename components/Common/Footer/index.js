@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import styles from "@/styles/Footer.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -30,7 +31,7 @@ const Footer = () => {
                   : ""
               }`}
             >
-              About Us
+              <Link href={`/about-us`}>About Us</Link>
             </li>
             <li
               className={`${styles.link} ${
@@ -39,7 +40,7 @@ const Footer = () => {
                   : ""
               }`}
             >
-              Services
+              <Link href={`/services`}>Services</Link>
             </li>
             <li
               className={`${styles.link} ${
@@ -48,14 +49,14 @@ const Footer = () => {
                   : ""
               }`}
             >
-              Our Placements
+              <Link href={`/our-placements`}>Our Placements</Link>
             </li>
             <li
               className={`${styles.link} ${
                 router.pathname == "/why-us" ? styles.active__header__link : ""
               }`}
             >
-              Why Us
+              <Link href={`/why-us`}>Why Us</Link>
             </li>
           </ul>
         </div>
