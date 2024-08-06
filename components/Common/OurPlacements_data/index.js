@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/Placements_data.module.css";
-import Image from "next/image";
 
 const OurPlacements_data = () => {
+  const [showFullList, setShowFullList] = useState(false);
+
   const data = [
     { srNo: 1, university: "Harvard University", placements: 1 },
     { srNo: 2, university: "Stanford University", placements: 8 },
@@ -53,6 +54,10 @@ const OurPlacements_data = () => {
     { srNo: 27, university: "Barnard College", placements: 11 },
   ];
 
+  const showMore = () => {
+    setShowFullList(true);
+  };
+
   return (
     <div className={styles.placements__container}>
       <div className={styles.placements__sub}>
@@ -66,7 +71,7 @@ const OurPlacements_data = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
+              {data.slice(0, showFullList ? data.length : 20).map((item) => (
                 <tr key={item.srNo}>
                   <td>{item.srNo}</td>
                   <td>{item.university}</td>
@@ -75,9 +80,14 @@ const OurPlacements_data = () => {
               ))}
             </tbody>
           </table>
-          <button className={`${styles.table__btn} ${styles.button__calypso}`}>
-            <span>KNOW MORE</span>
-          </button>
+          {!showFullList && (
+            <button
+              className={`${styles.table__btn} ${styles.button__calypso}`}
+              onClick={showMore}
+            >
+              <span>KNOW MORE</span>
+            </button>
+          )}
         </div>
       </div>
     </div>
