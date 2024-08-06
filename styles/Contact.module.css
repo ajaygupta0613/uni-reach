@@ -1,0 +1,226 @@
+.about__section__container {
+  width: 100%;
+  height: 100%;
+  padding: 0 60px;
+}
+
+.about__section__sub {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding: 140px 0;
+}
+
+.left__box__content__container {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 50px;
+  padding-right: 30px;
+}
+.our__service_image_title {
+  display: flex;
+  align-items: center;
+}
+.contact__info {
+}
+.center__box__content {
+  width: 50%;
+  padding: 80px 30px 0;
+}
+
+.arrow_vector__svg {
+  width: 45px;
+  height: auto;
+  position: absolute;
+  left: -60px;
+}
+
+.about__section__title {
+  font-family: var(--font-prata);
+  color: var(--primaryRed-color);
+  font-size: var(--fontSize-24);
+  font-weight: var(--fontWeight-400);
+}
+
+.about__section__text {
+  color: var(--primaryText-color);
+  font-size: var(--fontSize-18);
+  font-weight: var(--fontWeight-300);
+  line-height: var(--lineHeight-30);
+  max-width: 100%;
+  padding: 0 30px;
+}
+
+.bold {
+  font-weight: var(--fontWeight-600);
+}
+.left_border,
+.right_border {
+  position: relative;
+}
+.left_border::after {
+  content: "";
+  width: 0.5px;
+  height: 100%;
+  background: var(--border-color);
+  opacity: 0.5;
+  left: calc(25% + 30px);
+  position: absolute;
+  top: 0;
+}
+.right_border::before {
+  content: "";
+  width: 0.5px;
+  height: 100%;
+  background: var(--border-color);
+  opacity: 0.5;
+  right: calc(25% + 30px);
+  position: absolute;
+  top: 0;
+}
+.left__box__content__box {
+}
+.contact__info {
+}
+.ul__links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+.contact__links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--fontSize-14);
+  font-weight: var(--fontWeight-300);
+  color: var(--dark-color);
+}
+.contact__links img {
+  width: 25px;
+  height: 25px;
+}
+/* ============== contact Section END ============== */
+.contact__form__container {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 30px;
+}
+.contact_form_input_block_half {
+  width: calc(50% - 15px);
+}
+.contact_form_input_block {
+  width: 100%;
+}
+.contact_form_input_block textarea {
+  width: 100%;
+  border: 1px solid var(--primaryGrey-color);
+}
+.contact_lable {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-size: var(--fontSize-17);
+  line-height: var(--lineHeight-21);
+  font-weight: var(--fontWeight-400);
+  color: var(--dark-color);
+}
+.contact_form_input_block_half input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--primaryGrey-color);
+  border-radius: 0;
+}
+.why__btn {
+  max-width: fit-content;
+  background: var(--primaryGrey-color);
+  font-size: var(--fontSize-18);
+  font-weight: var(--fontWeight-600);
+  color: var(--white-color);
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--primaryGrey-color);
+}
+.button__calypso::before,
+.button__calypso::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.button__calypso span {
+  display: block;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.button__calypso:hover span {
+  color: var(--primaryRed-color);
+  animation: MoveScaleUpInitial 0.3s forwards, MoveScaleUpEnd 0.3s forwards 0.3s;
+}
+
+@keyframes MoveScaleUpInitial {
+  to {
+    transform: translate3d(0, -105%, 0) scale3d(0, 0, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes MoveScaleUpEnd {
+  from {
+    transform: translate3d(0, 100%, 0) scale3d(1, 2, 1);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.button__calypso::before {
+  content: "";
+  background: var(--white-color);
+  width: 120%;
+  height: 0;
+  padding-bottom: 120%;
+  top: -110%;
+  left: -10%;
+  border-radius: 50%;
+  transform: translate3d(0, 68%, 0) scale3d(0, 0, 0);
+}
+
+.button__calypso:hover::before {
+  transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  transition: transform 0.4s cubic-bezier(0.1, 0, 0.3, 1);
+}
+
+.button__calypso::after {
+  content: "";
+  background: var(--white-color);
+  transform: translate3d(0, -105%, 0);
+  transition: transform 0.4s cubic-bezier(0.1, 0, 0.3, 1);
+}
+
+.button__calypso:hover::after {
+  transform: translate3d(0, 0, 0);
+  transition-duration: 0.05s;
+  transition-delay: 0.4s;
+  transition-timing-function: linear;
+}
+/* ============== contact form Section END ============== */
