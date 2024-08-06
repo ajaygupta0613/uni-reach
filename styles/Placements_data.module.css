@@ -16,6 +16,9 @@
 
 .center__box__content {
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 table.placements-table {
   width: 100%;
@@ -63,14 +66,14 @@ table.placements-table {
   border-right: 1px solid var(--primaryGrey-color);
 }
 .table__btn {
-  width: 100%;
-  background: var(--primaryRed-color);
+  margin-top: 56px;
+  background: var(--primaryGrey-color);
   font-size: var(--fontSize-18);
   font-weight: var(--fontWeight-600);
   color: var(--white-color);
-  border: none;
+  border: 1px solid var(--primaryGrey-color);
   padding: 15px 20px;
-  border-radius: 0 0 10px 10px;
+  border-radius: 5px;
   text-transform: uppercase;
   cursor: pointer;
   position: relative;
