@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/Contact.module.css";
+import styles from "@/styles/Service.module.css";
 import Image from "next/image";
 
 const ServiceSection = () => {
@@ -20,8 +20,6 @@ const ServiceSection = () => {
         </div>
 
         <div className={styles.center__box__content}></div>
-
-        <div className={styles.left__box__content}></div>
       </div>
     </div>
   );
