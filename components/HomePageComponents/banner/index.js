@@ -2,7 +2,8 @@ import React from "react";
 import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 
-const HomeBanner = () => {
+const HomeBanner = ({ bannerData }) => {
+  console.log(bannerData);
   return (
     <div className={`${styles.home__banner__container} ${styles.left_border}`}>
       <Image
@@ -15,9 +16,7 @@ const HomeBanner = () => {
 
       <div className={styles.home__banner__sub}>
         <div className={styles.home__title__box}>
-          <h1 className={styles.home__title}>
-            Empowering Dreams, Guiding Futures
-          </h1>
+          <h1 className={styles.home__title}>{bannerData.heading}</h1>
         </div>
       </div>
     </div>

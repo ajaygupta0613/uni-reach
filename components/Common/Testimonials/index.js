@@ -139,8 +139,8 @@ const Testimonials = () => {
             <Slider {...settings}>
               {sliderData.map((item, id) => {
                 return (
-                  <div className={styles.slider__container}>
-                    <div className={styles.testimonial_card} key={id}>
+                  <div className={styles.slider__container} key={id}>
+                    <div className={styles.testimonial_card}>
                       <Image
                         src={item.profile}
                         width={100}

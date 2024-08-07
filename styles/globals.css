@@ -92,3 +92,19 @@ a {
   outline: none;
   background: var(--white-color) !important;
 }
+/* ============== Tab Section START ============== */
+.react-tabs {
+  display: flex;
+}
+ul.react-tabs__tab-list {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  padding-right: 30px;
+  border: none;
+}
+.react-tabs__tab-panel.react-tabs__tab-panel--selected {
+  width: 68%;
+  padding-left: 30px;
+}
+/* ============== Tab Section END ============== */

@@ -11,7 +11,8 @@ import AboutSection from "@/components/HomePageComponents/AboutSection";
 import WhyUs from "@/components/HomePageComponents/WhyUs";
 import OurService from "@/components/HomePageComponents/OurService";
 
-export default function Home() {
+export default function Home({ pageData }) {
+  console.log(pageData);
   return (
     <>
       <Head>
@@ -22,9 +23,9 @@ export default function Home() {
       </Head>
 
       <Header />
-      <HomeBanner />
-      <AboutSection />
-      <WhyUs />
+      <HomeBanner bannerData={pageData.banner} />
+      <AboutSection aboutData={pageData.about_us} />
+      <WhyUs whyUsData={pageData.why_us} />
       <OurService />
       <OurPlacements />
       <Testimonials />
@@ -33,3 +34,23 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  try {
+    const apiData = `https://unireach.in/wp-json/wp/v2/pages/7`;
+    const responsePageData = await fetch(apiData);
+    const PageData = await responsePageData.json();
+
+    return {
+      props: {
+        pageData: PageData?.acf,
+      },
+      revalidate: 30,
+    };
+  } catch (error) {
+    console.error("Error fetching WooCommerce products:", error);
+    return {
+      notFound: true,
+    };
+  }
+};

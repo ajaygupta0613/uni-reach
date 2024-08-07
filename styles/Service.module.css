@@ -32,8 +32,8 @@
 .contact__info {
 }
 .center__box__content {
-  width: 50%;
-  padding: 80px 30px 0;
+  width: 75%;
+  padding: 0 30px;
 }
 
 .arrow_vector__svg {
@@ -62,7 +62,8 @@
   font-weight: var(--fontWeight-600);
 }
 .left_border,
-.right_border {
+.right_border,
+.center_border {
   position: relative;
 }
 .left_border::after {
@@ -107,4 +108,14 @@
   width: 25px;
   height: 25px;
 }
-/* ============== contact Section END ============== */
+.center_border::after {
+  content: "";
+  width: 0.5px;
+  height: 100%;
+  background: var(--border-color);
+  opacity: 0.5;
+  left: 50%;
+  position: absolute;
+  top: 0;
+}
+/* ============== Service Section END ============== */
