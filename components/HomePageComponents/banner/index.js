@@ -6,13 +6,13 @@ const HomeBanner = ({ bannerData }) => {
   console.log(bannerData);
   return (
     <div className={`${styles.home__banner__container} ${styles.left_border}`}>
-      <Image
-        src={`/home/banner_bg.png`}
+      {/* <Image
+        src={`${bannerData.image}`}
         width={2000}
         height={2000}
         alt="Banner Bg"
         className={styles.banner__bg}
-      />
+      /> */}
 
       <div className={styles.home__banner__sub}>
         <div className={styles.home__title__box}>

@@ -2,7 +2,8 @@ import React from "react";
 import styles from "@/styles/About.module.css";
 import Image from "next/image";
 
-const AboutBanner = () => {
+const AboutBanner = ({ bannerData }) => {
+  console.log(bannerData);
   return (
     <div className={`${styles.about__banner__container} ${styles.left_border}`}>
       <Image
