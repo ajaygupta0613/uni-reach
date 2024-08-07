@@ -7,7 +7,7 @@ const AboutBanner = ({ bannerData }) => {
   return (
     <div className={`${styles.about__banner__container} ${styles.left_border}`}>
       <Image
-        src={`/about/about-banner.png`}
+        src={`${bannerData.image}`}
         width={2000}
         height={2000}
         alt="Banner Bg"
