@@ -122,10 +122,6 @@
   padding: 0 30px;
 }
 
-.bold {
-  font-weight: var(--fontWeight-600);
-}
-
 /* ============== About Section END ============== */
 
 .why__us__container {
@@ -327,11 +323,11 @@
   padding-left: 30px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   row-gap: 80px;
 }
 .our_service_card {
-  width: 30%;
+  width: 33.33%;
+  padding-right: 10px;
 }
 .our_service_card img {
   width: 60px;

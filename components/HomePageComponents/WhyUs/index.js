@@ -4,7 +4,6 @@ import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 
 const WhyUs = ({ whyUsData }) => {
-  console.log(whyUsData);
   return (
     <div className={styles.why__us__container}>
       <div className={styles.why__us__sub}>
@@ -32,7 +31,7 @@ const WhyUs = ({ whyUsData }) => {
         </div>
         <div className={styles.why__box}>
           <Image
-            src={`/home/why-us.png`}
+            src={`${whyUsData.image}`}
             width={2000}
             height={2000}
             alt="Why Us"

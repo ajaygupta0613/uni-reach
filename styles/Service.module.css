@@ -119,3 +119,20 @@
   top: 0;
 }
 /* ============== Service Section END ============== */
+.service_tab_content {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-size: var(--fontSize-18);
+  font-weight: var(--fontWeight-300);
+}
+.service_tab_content ul,
+.service_tab_content ol {
+  padding-inline-start: 20px;
+  margin: 10px 0 0;
+}
+.service_tab_content ul li,
+.service_tab_content ol li {
+  margin-bottom: 10px;
+}

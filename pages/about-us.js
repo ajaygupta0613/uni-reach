@@ -1,18 +1,15 @@
 import Head from "next/head";
-
 import Header from "@/components/Common/Header";
 import DreamUniversity from "@/components/Common/DreamUniversity";
 import Testimonials from "@/components/Common/Testimonials";
 import Footer from "@/components/Common/Footer";
-
 import AboutBanner from "@/components/AboutPageComponents/Banner";
 import AboutDetails from "@/components/AboutPageComponents/Details";
 import OurStory from "@/components/AboutPageComponents/OurStory";
 import Leadership from "@/components/AboutPageComponents/Leadership";
-import OurTeam from "@/components/AboutPageComponents/OurTeaam";
+import OurTeam from "@/components/AboutPageComponents/OurTeam";
 
 export default function Home({ pageData }) {
-  console.log(pageData);
   return (
     <>
       <Head>
@@ -24,12 +21,12 @@ export default function Home({ pageData }) {
 
       <Header />
       <AboutBanner bannerData={pageData.banner} />
-      <AboutDetails />
-      <OurStory />
-      <Leadership />
-      <OurTeam />
-      <Testimonials />
-      <DreamUniversity />
+      <AboutDetails detailsData={pageData.about_section} />
+      <OurStory storyData={pageData.our_story_section} />
+      <Leadership leadershipData={pageData.leadership} />
+      <OurTeam teamData={pageData.team} />
+      <Testimonials testimonialsData={pageData.testimonials} />
+      <DreamUniversity universityData={pageData.university} />
       <Footer />
     </>
   );
@@ -59,22 +56,32 @@ export const getStaticProps = async () => {
       };
 
       // Recursively update acf object to replace image IDs with URLs
-      const replaceImageIdsWithUrls = async (data) => {
+      const replaceImageIdsWithUrls = async (data, parentKey = "") => {
         for (const key in data) {
           if (data.hasOwnProperty(key)) {
+            const currentKey = parentKey ? `${parentKey}.${key}` : key;
             if (typeof data[key] === "number") {
               const imageUrl = await fetchImageUrl(data[key]);
               if (imageUrl) {
+                console.log(
+                  `Replacing image ID ${data[key]} at ${currentKey} with URL ${imageUrl}`
+                );
                 data[key] = imageUrl;
+              } else {
+                console.warn(
+                  `Failed to fetch URL for image ID ${data[key]} at ${currentKey}`
+                );
               }
             } else if (typeof data[key] === "object" && data[key] !== null) {
-              await replaceImageIdsWithUrls(data[key]);
+              await replaceImageIdsWithUrls(data[key], currentKey);
             }
           }
         }
       };
 
       await replaceImageIdsWithUrls(acf);
+    } else {
+      console.warn("No ACF data found in PageData");
     }
 
     return {

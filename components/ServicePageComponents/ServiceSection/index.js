@@ -4,7 +4,7 @@ import styles from "@/styles/Service.module.css";
 import "react-tabs/style/react-tabs.css";
 import Image from "next/image";
 
-const ServiceSection = () => {
+const ServiceSection = ({ serviceData }) => {
   return (
     <div
       className={`${styles.about__section__container} ${styles.left_border}`}
@@ -22,89 +22,38 @@ const ServiceSection = () => {
             <h2 className={styles.about__section__title}>Our Services</h2>
           </div>
           <div className={styles.contact__info}>
-            <p className={styles.about__section__text}>
-              Our work involves{" "}
-              <span className={styles.bold}>
-                designing the blueprint of your career pathway from A-Z.
-              </span>{" "}
-              We believe in ensuring students are ready with their best
-              application but also the right skills to ensure they excel in
-              their careers.
-            </p>
+            <div
+              className={styles.about__section__text}
+              dangerouslySetInnerHTML={{ __html: serviceData.sub_heading }}
+            />
           </div>
         </div>
 
         <div className={styles.center__box__content}>
           <Tabs>
             <TabList>
-              <Tab>
-                <Image
-                  src={`/service/fi_2644379%20(1).svg`}
-                  width={60}
-                  height={60}
-                  alt="Vector SVG"
-                  className={styles.service__icons}
-                />
-                Personalized Strategy{" "}
-              </Tab>
-              <Tab>Academic Guidance</Tab>
-              <Tab>Test Prep Resources and Strategies</Tab>
-              <Tab>College Selection</Tab>
-              <Tab>Crafting Authentic Essays and Stellar Applications</Tab>
-              <Tab>Document Preparation</Tab>
-              <Tab>Interview Prep</Tab>
-              <Tab>Continuous Support</Tab>
+              {serviceData.services.map((tab, index) => (
+                <Tab key={index}>
+                  <Image
+                    src={tab.icon}
+                    width={50}
+                    height={50}
+                    alt={`${tab.title} Icon`}
+                    className={styles.service__icons}
+                  />
+                  {tab.title}
+                </Tab>
+              ))}
             </TabList>
 
-            <TabPanel>
-              <p>
-                Every student is a unique masterpiece. At Unireach, we help you
-                discover and develop your passion, interests and strengths.
-              </p>
-              <ul>
-                <li>
-                  We conduct a deep dive into your academic background,
-                  interests, and dreams. 
-                </li>
-                <li>
-                  Then, we craft a custom roadmap guiding you from course
-                  selection, passion projects, award applications, summer
-                  schools to extracurriculars, with pit stops to track progress
-                  and tweak the plan. 
-                </li>
-                <li>
-                  Based on the year you join us, we divide and strategize the
-                  plan for each year with focus points in order to create an
-                  achievable list of goals.
-                </li>
-              </ul>
-              <p>
-                It's your journey, and we're here to make sure you reach your
-                desired destination, helping you learn to navigate roadblocks
-                along the way.
-              </p>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
+            {serviceData.services.map((tab, index) => (
+              <TabPanel key={index}>
+                <div
+                  className={`${styles.service_tab_content}`}
+                  dangerouslySetInnerHTML={{ __html: tab.description }}
+                />
+              </TabPanel>
+            ))}
           </Tabs>
         </div>
       </div>

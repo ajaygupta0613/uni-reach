@@ -20,6 +20,7 @@
   --fontSize-16: 16px;
   --fontSize-17: 17px;
   --fontSize-18: 18px;
+  --fontSize-20: 20px;
   --fontSize-24: 24px;
   --fontSize-35: 35px;
   --fontSize-50: 50px;
@@ -92,6 +93,9 @@ a {
   outline: none;
   background: var(--white-color) !important;
 }
+strong {
+  font-weight: var(--fontWeight-500);
+}
 /* ============== Tab Section START ============== */
 .react-tabs {
   display: flex;
@@ -102,9 +106,34 @@ ul.react-tabs__tab-list {
   width: 32%;
   padding-right: 30px;
   border: none;
+  gap: 80px;
 }
 .react-tabs__tab-panel.react-tabs__tab-panel--selected {
   width: 68%;
   padding-left: 30px;
 }
+.react-tabs__tab--selected {
+  border: none !important;
+  opacity: 1 !important;
+}
+.react-tabs__tab {
+  color: var(--dark-color);
+  opacity: 0.5;
+  font-size: var(--fontSize-20);
+  font-weight: var(--fontWeight-600);
+  padding-inline-start: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  border: none !important;
+  min-height: 52px;
+}
+.react-tabs__tab img {
+  position: absolute;
+  left: 0;
+}
+.react-tabs__tab-panel {
+  position: relative;
+  overflow: auto; /* Ensure scrollable if content exceeds height */
+}
+
 /* ============== Tab Section END ============== */

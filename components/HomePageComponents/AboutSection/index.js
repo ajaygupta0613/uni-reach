@@ -3,7 +3,6 @@ import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 
 const AboutSection = ({ aboutData }) => {
-  console.log(aboutData);
   return (
     <div
       className={`${styles.about__section__container} ${styles.left_border} ${styles.right_border}`}

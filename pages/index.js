@@ -11,8 +11,7 @@ import AboutSection from "@/components/HomePageComponents/AboutSection";
 import WhyUs from "@/components/HomePageComponents/WhyUs";
 import OurService from "@/components/HomePageComponents/OurService";
 
-export default function Home({ pageData }) {
-  console.log(pageData);
+export default function Home({ pageData, placementsData, testimonialsData }) {
   return (
     <>
       <Head>
@@ -21,14 +20,13 @@ export default function Home({ pageData }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Header />
       <HomeBanner bannerData={pageData.banner} />
       <AboutSection aboutData={pageData.about_us} />
       <WhyUs whyUsData={pageData.why_us} />
-      <OurService />
-      <OurPlacements />
-      <Testimonials />
+      <OurService OurServiceData={pageData.our_service} />
+      <OurPlacements placementsData={placementsData} /> {/* Pass the data */}
+      <Testimonials testimonialsData={testimonialsData} /> {/* Pass the data */}
       <DreamUniversity />
       <Footer />
     </>
@@ -41,14 +39,72 @@ export const getStaticProps = async () => {
     const responsePageData = await fetch(apiData);
     const PageData = await responsePageData.json();
 
+    const acf = PageData?.acf;
+
+    if (acf) {
+      const fetchImageUrl = async (imageId) => {
+        try {
+          const response = await fetch(
+            `https://unireach.in/wp-json/wp/v2/media/${imageId}`
+          );
+          const imageData = await response.json();
+          return imageData.source_url;
+        } catch (error) {
+          console.error(`Error fetching image data for ID ${imageId}:`, error);
+          return null;
+        }
+      };
+
+      const replaceImageIdsWithUrls = async (data, parentKey = "") => {
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const currentKey = parentKey ? `${parentKey}.${key}` : key;
+            if (typeof data[key] === "number") {
+              const imageUrl = await fetchImageUrl(data[key]);
+              if (imageUrl) {
+                console.log(
+                  `Replacing image ID ${data[key]} at ${currentKey} with URL ${imageUrl}`
+                );
+                data[key] = imageUrl;
+              } else {
+                console.warn(
+                  `Failed to fetch URL for image ID ${data[key]} at ${currentKey}`
+                );
+              }
+            } else if (typeof data[key] === "object" && data[key] !== null) {
+              await replaceImageIdsWithUrls(data[key], currentKey);
+            }
+          }
+        }
+      };
+
+      await replaceImageIdsWithUrls(acf);
+    } else {
+      console.warn("No ACF data found in PageData");
+    }
+
+    // Fetch OurPlacements CPT data
+    const placementsRes = await fetch(
+      `https://unireach.in/wp-json/wp/v2/our-placements`
+    );
+    const placementsData = await placementsRes.json();
+
+    // Fetch Testimonials CPT data
+    const testimonialsRes = await fetch(
+      `https://unireach.in/wp-json/wp/v2/testimonial`
+    );
+    const testimonialsData = await testimonialsRes.json();
+
     return {
       props: {
-        pageData: PageData?.acf,
+        pageData: acf,
+        placementsData, // Pass placements data as a prop
+        testimonialsData, // Pass testimonials data as a prop
       },
       revalidate: 30,
     };
   } catch (error) {
-    console.error("Error fetching WooCommerce products:", error);
+    console.error("Error fetching page data:", error);
     return {
       notFound: true,
     };
