@@ -9,7 +9,7 @@ import OurStory from "@/components/AboutPageComponents/OurStory";
 import Leadership from "@/components/AboutPageComponents/Leadership";
 import OurTeam from "@/components/AboutPageComponents/OurTeam";
 
-export default function Home({ pageData, optionPageData }) {
+export default function Home({ pageData, optionPageData, testimonialData }) {
   return (
     <>
       <Head>
@@ -25,7 +25,7 @@ export default function Home({ pageData, optionPageData }) {
       <OurStory storyData={pageData.our_story_section} />
       <Leadership leadershipData={pageData.leadership} />
       <OurTeam teamData={pageData.team} />
-      <Testimonials testimonialsData={pageData.testimonials} />
+      <Testimonials testimonialData={testimonialData} />
       <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
@@ -87,11 +87,17 @@ export const getStaticProps = async () => {
     } else {
       console.warn("No ACF data found in PageData");
     }
+    // Fetch Testimonials CPT data
+    const testimonialRes = await fetch(
+      `https://unireach.in/wp-json/wp/v2/testimonial?per_page=100`
+    );
+    const testimonialData = await testimonialRes.json();
 
     return {
       props: {
         pageData: acf,
         optionPageData,
+        testimonialData,
       },
       revalidate: 30,
     };

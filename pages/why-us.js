@@ -8,7 +8,7 @@ import Footer from "@/components/Common/Footer";
 import WhyUsBanner from "@/components/WhyUsPageComponents/Banner";
 import WhyUsDetails from "@/components/WhyUsPageComponents/WhyUsDetails";
 
-export default function Home({ pageData, optionPageData }) {
+export default function Home({ pageData, optionPageData, testimonialData }) {
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ export default function Home({ pageData, optionPageData }) {
       <Header />
       <WhyUsBanner bannerData={pageData.banner} />
       <WhyUsDetails whyUsData={pageData.why_us_details} />
-      <Testimonials />
+      <Testimonials testimonialData={testimonialData} />
       <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
@@ -82,11 +82,16 @@ export const getStaticProps = async () => {
     } else {
       console.warn("No ACF data found in PageData");
     }
-
+    // Fetch Testimonials CPT data
+    const testimonialRes = await fetch(
+      `https://unireach.in/wp-json/wp/v2/testimonial?per_page=100`
+    );
+    const testimonialData = await testimonialRes.json();
     return {
       props: {
         pageData: acf,
         optionPageData,
+        testimonialData,
       },
       revalidate: 30,
     };

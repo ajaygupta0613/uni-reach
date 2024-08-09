@@ -14,10 +14,9 @@ import OurService from "@/components/HomePageComponents/OurService";
 export default function Home({
   pageData,
   placementsData,
-  testimonialsData,
+  testimonialData,
   optionPageData,
 }) {
-  console.log(placementsData);
   return (
     <>
       <Head>
@@ -32,7 +31,7 @@ export default function Home({
       <WhyUs whyUsData={pageData.why_us} />
       <OurService OurServiceData={pageData.our_service} />
       <OurPlacements placementsData={placementsData} /> {/* Pass the data */}
-      <Testimonials testimonialsData={testimonialsData} /> {/* Pass the data */}
+      <Testimonials testimonialData={testimonialData} /> {/* Pass the data */}
       <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
@@ -101,17 +100,17 @@ export const getStaticProps = async () => {
     const placementsData = await placementsRes.json();
 
     // Fetch Testimonials CPT data
-    const testimonialsRes = await fetch(
-      `https://unireach.in/wp-json/wp/v2/testimonial`
+    const testimonialRes = await fetch(
+      `https://unireach.in/wp-json/wp/v2/testimonial?per_page=100`
     );
-    const testimonialsData = await testimonialsRes.json();
+    const testimonialData = await testimonialRes.json();
 
     return {
       props: {
         pageData: acf,
         optionPageData,
         placementsData,
-        testimonialsData,
+        testimonialData,
       },
       revalidate: 30,
     };

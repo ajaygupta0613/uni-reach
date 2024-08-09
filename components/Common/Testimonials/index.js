@@ -43,38 +43,7 @@ function PrevArrow(props) {
   );
 }
 
-const sliderData = [
-  {
-    profile: "/home/profile-img.png",
-    description:
-      "With Aakriti Ma’am's unwavering support and invaluable guidance, I found the perfect university and discovered my true potential. The attention and care given to every aspect of my application exceeded my expectations. From harnessing my passions authentically to expanding my vocabulary and curating a balanced high-school life, my experience with Unireach was beyond excellent. Despite my inconsistent grades and indecisiveness, they helped me navigate the stressful application process effortlessly. Thanks to Aakriti Ma’am, I received an acceptance from NYU in the ED 1 round. Her assurance and motivation were crucial in curating an application that showcased my diverse interests and achievements.  From harnessing my passions authentically to expanding my",
-    name: "Anoushka Reddy",
-    location: "Hyderabad",
-  },
-  {
-    profile: "/home/profile-img.png",
-    description:
-      "With Aakriti Ma’am's unwavering support and invaluable guidance, I found the perfect university and discovered my true potential. The attention and care given to every aspect of my application exceeded my expectations. From harnessing my passions authentically to expanding my vocabulary and curating a balanced high-school life, my experience with Unireach was beyond excellent. Despite my inconsistent grades and indecisiveness, they helped me navigate the stressful application process effortlessly. Thanks to Aakriti Ma’am, I received an acceptance from NYU in the ED 1 round. Her assurance and motivation were crucial in curating an application that showcased my diverse interests and achievements.  From harnessing my passions authentically to expanding my",
-    name: "Anoushka Reddy",
-    location: "Hyderabad",
-  },
-  {
-    profile: "/home/profile-img.png",
-    description:
-      "With Aakriti Ma’am's unwavering support and invaluable guidance, I found the perfect university and discovered my true potential. The attention and care given to every aspect of my application exceeded my expectations. From harnessing my passions authentically to expanding my vocabulary and curating a balanced high-school life, my experience with Unireach was beyond excellent. Despite my inconsistent grades and indecisiveness, they helped me navigate the stressful application process effortlessly. Thanks to Aakriti Ma’am, I received an acceptance from NYU in the ED 1 round. Her assurance and motivation were crucial in curating an application that showcased my diverse interests and achievements.  From harnessing my passions authentically to expanding my",
-    name: "Anoushka Reddy",
-    location: "Hyderabad",
-  },
-  {
-    profile: "/home/profile-img.png",
-    description:
-      "With Aakriti Ma’am's unwavering support and invaluable guidance, I found the perfect university and discovered my true potential. The attention and care given to every aspect of my application exceeded my expectations. From harnessing my passions authentically to expanding my vocabulary and curating a balanced high-school life, my experience with Unireach was beyond excellent. Despite my inconsistent grades and indecisiveness, they helped me navigate the stressful application process effortlessly. Thanks to Aakriti Ma’am, I received an acceptance from NYU in the ED 1 round. Her assurance and motivation were crucial in curating an application that showcased my diverse interests and achievements.  From harnessing my passions authentically to expanding my",
-    name: "Anoushka Reddy",
-    location: "Hyderabad",
-  },
-];
-
-const Testimonials = () => {
+const Testimonials = ({ testimonialData }) => {
   var settings = {
     infinite: true,
     speed: 500,
@@ -137,60 +106,52 @@ const Testimonials = () => {
           />
           <div className={styles.testimonial_cards_container}>
             <Slider {...settings}>
-              {sliderData.map((item, id) => {
+              {testimonialData.map((data, id) => {
                 return (
                   <div className={styles.slider__container} key={id}>
                     <div className={styles.testimonial_card}>
-                      <Image
-                        src={item.profile}
-                        width={100}
-                        height={100}
-                        alt="Testimonials Image"
-                        className={styles.testimonial_profile_img}
-                      />
+                      {data.acf.profile_image && (
+                        <Image
+                          src={data.acf.profile_image}
+                          width={100}
+                          height={100}
+                          alt="Testimonials Image"
+                          className={styles.testimonial_profile_img}
+                        />
+                      )}
                       <div className={styles.testimonial_details}>
-                        <p>{item.description}</p>
+                        <div
+                          className={styles.testimonial_text}
+                          dangerouslySetInnerHTML={{
+                            __html: data.acf.review,
+                          }}
+                        />
                       </div>
                       <div className={styles.testimonial_ratting}>
-                        <Image
-                          src={`/home/Star-fill.svg`}
-                          width={100}
-                          height={100}
-                          alt="Vector SVG"
-                          className={styles.testimonial_ratting_fill}
-                        />
-                        <Image
-                          src={`/home/Star-fill.svg`}
-                          width={100}
-                          height={100}
-                          alt="Vector SVG"
-                          className={styles.testimonial_ratting_fill}
-                        />
-                        <Image
-                          src={`/home/Star-fill.svg`}
-                          width={100}
-                          height={100}
-                          alt="Vector SVG"
-                          className={styles.testimonial_ratting_fill}
-                        />
-                        <Image
-                          src={`/home/Star-fill.svg`}
-                          width={100}
-                          height={100}
-                          alt="Vector SVG"
-                          className={styles.testimonial_ratting_fill}
-                        />
-                        <Image
-                          src={`/home/Star-empty.svg`}
-                          width={100}
-                          height={100}
-                          alt="Vector SVG"
-                          className={styles.testimonial_ratting_empty}
-                        />
+                        {Array.from({ length: 5 }, (_, index) => (
+                          <Image
+                            key={index}
+                            src={
+                              index < data.acf.rating
+                                ? "/home/Star-fill.svg"
+                                : "/home/Star-empty.svg"
+                            }
+                            width={100}
+                            height={100}
+                            alt="Rating Star"
+                            className={
+                              index < data.acf.rating
+                                ? styles.testimonial_ratting_fill
+                                : styles.testimonial_ratting_empty
+                            }
+                          />
+                        ))}
                       </div>
-                      <div className={styles.testimonial_name}>{item.name}</div>
+                      <div className={styles.testimonial_name}>
+                        {data.title.rendered}
+                      </div>
                       <div className={styles.testimonial_designation}>
-                        {item.location}
+                        {data.acf.location}
                       </div>
                     </div>
                   </div>
