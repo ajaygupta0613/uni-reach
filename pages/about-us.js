@@ -9,7 +9,7 @@ import OurStory from "@/components/AboutPageComponents/OurStory";
 import Leadership from "@/components/AboutPageComponents/Leadership";
 import OurTeam from "@/components/AboutPageComponents/OurTeam";
 
-export default function Home({ pageData }) {
+export default function Home({ pageData, optionPageData }) {
   return (
     <>
       <Head>
@@ -26,7 +26,7 @@ export default function Home({ pageData }) {
       <Leadership leadershipData={pageData.leadership} />
       <OurTeam teamData={pageData.team} />
       <Testimonials testimonialsData={pageData.testimonials} />
-      <DreamUniversity universityData={pageData.university} />
+      <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
   );
@@ -35,8 +35,12 @@ export default function Home({ pageData }) {
 export const getStaticProps = async () => {
   try {
     const apiData = `https://unireach.in/wp-json/wp/v2/pages/464`;
+    const optionData = `https://unireach.in/wp-json/acf/v3/options/option`;
     const responsePageData = await fetch(apiData);
     const PageData = await responsePageData.json();
+
+    const responseOptionPageData = await fetch(optionData);
+    const optionPageData = await responseOptionPageData.json();
 
     const acf = PageData?.acf;
 
@@ -87,6 +91,7 @@ export const getStaticProps = async () => {
     return {
       props: {
         pageData: acf,
+        optionPageData,
       },
       revalidate: 30,
     };

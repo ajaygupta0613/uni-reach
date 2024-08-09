@@ -11,7 +11,13 @@ import AboutSection from "@/components/HomePageComponents/AboutSection";
 import WhyUs from "@/components/HomePageComponents/WhyUs";
 import OurService from "@/components/HomePageComponents/OurService";
 
-export default function Home({ pageData, placementsData, testimonialsData }) {
+export default function Home({
+  pageData,
+  placementsData,
+  testimonialsData,
+  optionPageData,
+}) {
+  console.log(placementsData);
   return (
     <>
       <Head>
@@ -27,7 +33,7 @@ export default function Home({ pageData, placementsData, testimonialsData }) {
       <OurService OurServiceData={pageData.our_service} />
       <OurPlacements placementsData={placementsData} /> {/* Pass the data */}
       <Testimonials testimonialsData={testimonialsData} /> {/* Pass the data */}
-      <DreamUniversity />
+      <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
   );
@@ -36,8 +42,13 @@ export default function Home({ pageData, placementsData, testimonialsData }) {
 export const getStaticProps = async () => {
   try {
     const apiData = `https://unireach.in/wp-json/wp/v2/pages/7`;
+    const optionData = `https://unireach.in/wp-json/acf/v3/options/option`;
+
     const responsePageData = await fetch(apiData);
     const PageData = await responsePageData.json();
+
+    const responseOptionPageData = await fetch(optionData);
+    const optionPageData = await responseOptionPageData.json();
 
     const acf = PageData?.acf;
 
@@ -85,7 +96,7 @@ export const getStaticProps = async () => {
 
     // Fetch OurPlacements CPT data
     const placementsRes = await fetch(
-      `https://unireach.in/wp-json/wp/v2/our-placements`
+      `https://unireach.in/wp-json/wp/v2/our_placements?per_page=100`
     );
     const placementsData = await placementsRes.json();
 
@@ -98,8 +109,9 @@ export const getStaticProps = async () => {
     return {
       props: {
         pageData: acf,
-        placementsData, // Pass placements data as a prop
-        testimonialsData, // Pass testimonials data as a prop
+        optionPageData,
+        placementsData,
+        testimonialsData,
       },
       revalidate: 30,
     };

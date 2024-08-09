@@ -8,7 +8,7 @@ import Footer from "@/components/Common/Footer";
 import WhyUsBanner from "@/components/WhyUsPageComponents/Banner";
 import WhyUsDetails from "@/components/WhyUsPageComponents/WhyUsDetails";
 
-export default function Home({ pageData }) {
+export default function Home({ pageData, optionPageData }) {
   return (
     <>
       <Head>
@@ -22,7 +22,7 @@ export default function Home({ pageData }) {
       <WhyUsBanner bannerData={pageData.banner} />
       <WhyUsDetails whyUsData={pageData.why_us_details} />
       <Testimonials />
-      <DreamUniversity />
+      <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
   );
@@ -31,10 +31,13 @@ export default function Home({ pageData }) {
 export const getStaticProps = async () => {
   try {
     const apiData = `https://unireach.in/wp-json/wp/v2/pages/591`;
+    const optionData = `https://unireach.in/wp-json/acf/v3/options/option`;
     const responsePageData = await fetch(apiData);
     const PageData = await responsePageData.json();
 
     const acf = PageData?.acf;
+    const responseOptionPageData = await fetch(optionData);
+    const optionPageData = await responseOptionPageData.json();
 
     if (acf) {
       // Function to fetch image URL by ID
@@ -83,6 +86,7 @@ export const getStaticProps = async () => {
     return {
       props: {
         pageData: acf,
+        optionPageData,
       },
       revalidate: 30,
     };

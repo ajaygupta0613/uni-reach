@@ -1,19 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/Placements.module.css";
 import Image from "next/image";
 
-const OurPlacements = () => {
-  const data = [
-    { srNo: 1, university: "Harvard University", placements: 1 },
-    { srNo: 2, university: "Stanford University", placements: 8 },
-    { srNo: 3, university: "Caltech", placements: 2 },
-    { srNo: 4, university: "Princeton University", placements: 8 },
-    { srNo: 5, university: "Yale University", placements: 9 },
-    { srNo: 6, university: "University of Pennsylvania", placements: 13 },
-    { srNo: 7, university: "University of Chicago", placements: 15 },
-    { srNo: 8, university: "Columbia University", placements: 6 },
-  ];
+const OurPlacements = ({ placementsData }) => {
+  const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    // Set the first 10 posts in the state
+    setPosts(placementsData && placementsData.slice(0, 10));
+  }, []);
+  console.log("p", placementsData);
   return (
     <div className={styles.placements__container}>
       <div className={styles.placements__sub}>
@@ -37,11 +33,11 @@ const OurPlacements = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
-                <tr key={item.srNo}>
-                  <td>{item.srNo}</td>
-                  <td>{item.university}</td>
-                  <td>{item.placements}</td>
+              {posts.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.title.rendered}</td>
+                  <td>{item.acf.number}</td>
                 </tr>
               ))}
             </tbody>

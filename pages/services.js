@@ -7,7 +7,7 @@ import Footer from "@/components/Common/Footer";
 import ServiceBanner from "@/components/ServicePageComponents/Banner";
 import ServiceSection from "@/components/ServicePageComponents/ServiceSection";
 
-export default function Home({ pageData }) {
+export default function Home({ pageData, optionPageData }) {
   return (
     <>
       <Head>
@@ -20,7 +20,7 @@ export default function Home({ pageData }) {
       <Header />
       <ServiceBanner bannerData={pageData.banner} />
       <ServiceSection serviceData={pageData.service_section} />
-      <DreamUniversity />
+      <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
   );
@@ -29,8 +29,12 @@ export default function Home({ pageData }) {
 export const getStaticProps = async () => {
   try {
     const apiData = `https://unireach.in/wp-json/wp/v2/pages/629`;
+    const optionData = `https://unireach.in/wp-json/acf/v3/options/option`;
     const responsePageData = await fetch(apiData);
     const PageData = await responsePageData.json();
+
+    const responseOptionPageData = await fetch(optionData);
+    const optionPageData = await responseOptionPageData.json();
 
     const acf = PageData?.acf;
 
@@ -81,6 +85,7 @@ export const getStaticProps = async () => {
     return {
       props: {
         pageData: acf,
+        optionPageData,
       },
       revalidate: 30,
     };
