@@ -120,10 +120,6 @@
 }
 /* ============== Service Section END ============== */
 .service_tab_content {
-  position: -webkit-sticky; /* For Safari */
-  position: sticky;
-  top: 0;
-  z-index: 1000;
   font-size: var(--fontSize-18);
   font-weight: var(--fontWeight-300);
 }

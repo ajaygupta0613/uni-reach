@@ -1,14 +1,13 @@
 import Head from "next/head";
 
 import Header from "@/components/Common/Header";
-import OurPlacements_data from "@/components/Common/OurPlacements_data";
+import OurPlacements from "@/components/Common/OurPlacements_data";
 import DreamUniversity from "@/components/Common/DreamUniversity";
 import Footer from "@/components/Common/Footer";
 
 import PlacementsBanner from "@/components/PlacementPageComponents/Banner";
-import Placements from "@/components/PlacementPageComponents/Placements";
 
-export default function Home({ pageData, optionPageData }) {
+export default function Home({ pageData, optionPageData, placementsData }) {
   return (
     <>
       <Head>
@@ -20,7 +19,7 @@ export default function Home({ pageData, optionPageData }) {
 
       <Header />
       <PlacementsBanner bannerData={pageData.banner} />
-      <OurPlacements_data />
+      <OurPlacements placementsData={placementsData} />
       <DreamUniversity optionData={optionPageData.acf} />
       <Footer />
     </>
@@ -81,11 +80,16 @@ export const getStaticProps = async () => {
     } else {
       console.warn("No ACF data found in PageData");
     }
-
+    // Fetch OurPlacements CPT data
+    const placementsRes = await fetch(
+      `https://unireach.in/wp-json/wp/v2/our_placements?per_page=100`
+    );
+    const placementsData = await placementsRes.json();
     return {
       props: {
         pageData: acf,
         optionPageData,
+        placementsData,
       },
       revalidate: 30,
     };

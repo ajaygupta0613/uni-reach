@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import styles from "@/styles/Service.module.css";
 import "react-tabs/style/react-tabs.css";
 import Image from "next/image";
+import Sticky from "react-sticky-el";
 
 const ServiceSection = ({ serviceData }) => {
   return (
@@ -48,10 +49,12 @@ const ServiceSection = ({ serviceData }) => {
 
             {serviceData.services.map((tab, index) => (
               <TabPanel key={index}>
-                <div
-                  className={`${styles.service_tab_content}`}
-                  dangerouslySetInnerHTML={{ __html: tab.description }}
-                />
+                <Sticky>
+                  <div
+                    className={`${styles.service_tab_content}`}
+                    dangerouslySetInnerHTML={{ __html: tab.description }}
+                  />
+                </Sticky>
               </TabPanel>
             ))}
           </Tabs>

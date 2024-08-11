@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/styles/Contact.module.css";
 import Image from "next/image";
 
-const ContactDetails = () => {
+const ContactDetails = ({ contactData }) => {
   return (
     <div
       className={`${styles.about__section__container} ${styles.left_border} ${styles.right_border}`}
@@ -18,31 +18,23 @@ const ContactDetails = () => {
               className={styles.arrow_vector__svg}
             />
             <h2 className={styles.about__section__title}>
-              Book a call with us today
+              {contactData.heading}
             </h2>
           </div>
           <div className={styles.contact__info}>
             <ul className={styles.ul__links}>
-              <li className={styles.contact__links}>
-                <Image
-                  src={`/contact/email.svg`}
-                  width={30}
-                  height={30}
-                  alt="Phone Svg"
-                  className={styles.contact__svg}
-                />
-                <a href="mailto:outreach@unireach.in">outreach@unireach.in</a>
-              </li>
-              <li className={styles.contact__links}>
-                <Image
-                  src={`/contact/phone.svg`}
-                  width={30}
-                  height={30}
-                  alt="Phone Svg"
-                  className={styles.contact__svg}
-                />
-                <a href="tel:+91 97733 34457">+91 97733 34457</a>
-              </li>
+              {contactData.Contact_Info.map((info, index) => (
+                <li className={styles.contact__links} key={index}>
+                  <Image
+                    src={`${info.icon}`}
+                    width={30}
+                    height={30}
+                    alt="Phone Svg"
+                    className={styles.contact__svg}
+                  />
+                  <a href={info.link}>{info.lable}</a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

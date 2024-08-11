@@ -1,61 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/Placements_data.module.css";
 
-const OurPlacements_data = () => {
-  const [showFullList, setShowFullList] = useState(false);
+const OurPlacements = ({ placementsData }) => {
+  const [posts, setPosts] = useState([]);
 
-  const data = [
-    { srNo: 1, university: "Harvard University", placements: 1 },
-    { srNo: 2, university: "Stanford University", placements: 8 },
-    { srNo: 3, university: "Caltech", placements: 2 },
-    { srNo: 4, university: "Princeton University", placements: 8 },
-    { srNo: 5, university: "Yale University", placements: 9 },
-    { srNo: 6, university: "University of Pennsylvania", placements: 13 },
-    { srNo: 7, university: "University of Chicago", placements: 15 },
-    { srNo: 8, university: "Columbia University", placements: 6 },
-    { srNo: 9, university: "NYU Stern", placements: 27 },
-    { srNo: 10, university: "Dartmouth College", placements: 7 },
-    { srNo: 11, university: "Brown University", placements: 20 },
-    { srNo: 12, university: "Cornell University", placements: 20 },
-    { srNo: 13, university: "Duke University", placements: 17 },
-    { srNo: 14, university: "Northwestern University", placements: 16 },
-    { srNo: 15, university: "Johns Hopkins University", placements: 21 },
-    { srNo: 16, university: "Carnegie Mellon University", placements: 34 },
-    {
-      srNo: 17,
-      university: "University of California, Berkeley (UC Berkeley)",
-      placements: 29,
-    },
-    {
-      srNo: 18,
-      university: "University of California, Los Angeles (UCLA)",
-      placements: 48,
-    },
-    {
-      srNo: 19,
-      university: "University of Southern California (USC)",
-      placements: 52,
-    },
-    { srNo: 20, university: "Georgetown University", placements: 16 },
-    { srNo: 21, university: "Vanderbilt University", placements: 19 },
-    { srNo: 22, university: "Emory University", placements: 54 },
-    { srNo: 23, university: "New York University (NYU CAS)", placements: 45 },
-    { srNo: 24, university: "Rice University", placements: 9 },
-    {
-      srNo: 25,
-      university: "New York University Shanghai (NYU Shanghai)",
-      placements: 13,
-    },
-    {
-      srNo: 26,
-      university: "New York University Abu Dhabi (NYU Abu Dhabi)",
-      placements: 14,
-    },
-    { srNo: 27, university: "Barnard College", placements: 11 },
-  ];
+  useEffect(() => {
+    // Sort the placements data by publish date in ascending order (oldest first)
+    const sortedData = [...placementsData].sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
+    setPosts(sortedData.slice(0, 20));
+  }, [placementsData]);
 
-  const showMore = () => {
-    setShowFullList(true);
+  const handleShowMore = () => {
+    // Sort all posts by publish date in ascending order and set them in the state
+    const sortedData = [...placementsData].sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
+    setPosts(sortedData);
   };
 
   return (
@@ -71,19 +33,19 @@ const OurPlacements_data = () => {
               </tr>
             </thead>
             <tbody>
-              {data.slice(0, showFullList ? data.length : 20).map((item) => (
-                <tr key={item.srNo}>
-                  <td>{item.srNo}</td>
-                  <td>{item.university}</td>
-                  <td>{item.placements}</td>
+              {posts.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.title.rendered}</td>
+                  <td>{item.acf.number}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-          {!showFullList && (
+          {posts.length < placementsData.length && (
             <button
               className={`${styles.table__btn} ${styles.button__calypso}`}
-              onClick={showMore}
+              onClick={handleShowMore}
             >
               <span>KNOW MORE</span>
             </button>
@@ -94,4 +56,4 @@ const OurPlacements_data = () => {
   );
 };
 
-export default OurPlacements_data;
+export default OurPlacements;

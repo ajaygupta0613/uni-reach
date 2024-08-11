@@ -6,7 +6,7 @@ import Footer from "@/components/Common/Footer";
 import ContactBanner from "@/components/ContactPageComponents/Banner";
 import ContactDetails from "@/components/ContactPageComponents/ContactDetails";
 
-export default function Home() {
+export default function Home({ pageData }) {
   return (
     <>
       <Head>
@@ -17,9 +17,75 @@ export default function Home() {
       </Head>
 
       <Header />
-      <ContactBanner />
-      <ContactDetails />
+      <ContactBanner bannerData={pageData.banner} />
+      <ContactDetails contactData={pageData.contact_section} />
       <Footer />
     </>
   );
 }
+export const getStaticProps = async () => {
+  try {
+    const apiData = `https://unireach.in/wp-json/wp/v2/pages/602`;
+
+    const responsePageData = await fetch(apiData);
+    const PageData = await responsePageData.json();
+
+    const acf = PageData?.acf;
+
+    if (acf) {
+      // Function to fetch image URL by ID
+      const fetchImageUrl = async (imageId) => {
+        try {
+          const response = await fetch(
+            `https://unireach.in/wp-json/wp/v2/media/${imageId}`
+          );
+          const imageData = await response.json();
+          return imageData.source_url;
+        } catch (error) {
+          console.error(`Error fetching image data for ID ${imageId}:`, error);
+          return null;
+        }
+      };
+
+      // Recursively update acf object to replace image IDs with URLs
+      const replaceImageIdsWithUrls = async (data, parentKey = "") => {
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const currentKey = parentKey ? `${parentKey}.${key}` : key;
+            if (typeof data[key] === "number") {
+              const imageUrl = await fetchImageUrl(data[key]);
+              if (imageUrl) {
+                console.log(
+                  `Replacing image ID ${data[key]} at ${currentKey} with URL ${imageUrl}`
+                );
+                data[key] = imageUrl;
+              } else {
+                console.warn(
+                  `Failed to fetch URL for image ID ${data[key]} at ${currentKey}`
+                );
+              }
+            } else if (typeof data[key] === "object" && data[key] !== null) {
+              await replaceImageIdsWithUrls(data[key], currentKey);
+            }
+          }
+        }
+      };
+
+      await replaceImageIdsWithUrls(acf);
+    } else {
+      console.warn("No ACF data found in PageData");
+    }
+
+    return {
+      props: {
+        pageData: acf,
+      },
+      revalidate: 30,
+    };
+  } catch (error) {
+    console.error("Error fetching page data:", error);
+    return {
+      notFound: true,
+    };
+  }
+};
