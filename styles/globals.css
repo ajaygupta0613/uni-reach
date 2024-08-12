@@ -137,3 +137,7 @@ ul.react-tabs__tab-list {
 }
 
 /* ============== Tab Section END ============== */
+
+.pin-spacer {
+  padding: 0 !important;
+}
