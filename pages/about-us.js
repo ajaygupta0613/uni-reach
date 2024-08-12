@@ -19,7 +19,7 @@ export default function Home({ pageData, optionPageData, testimonialData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header headerOption={optionPageData.acf} />
       <AboutBanner bannerData={pageData.banner} />
       <AboutDetails detailsData={pageData.about_section} />
       <OurStory storyData={pageData.our_story_section} />

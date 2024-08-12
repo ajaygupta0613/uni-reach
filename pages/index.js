@@ -17,6 +17,7 @@ export default function Home({
   testimonialData,
   optionPageData,
 }) {
+  console.log(optionPageData);
   return (
     <>
       <Head>
@@ -25,7 +26,7 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header headerOption={optionPageData.acf} />
       <HomeBanner bannerData={pageData.banner} />
       <AboutSection aboutData={pageData.about_us} />
       <WhyUs whyUsData={pageData.why_us} />
@@ -33,7 +34,7 @@ export default function Home({
       <OurPlacements placementsData={placementsData} /> {/* Pass the data */}
       <Testimonials testimonialData={testimonialData} /> {/* Pass the data */}
       <DreamUniversity optionData={optionPageData.acf} />
-      <Footer />
+      <Footer footerOption={optionPageData.acf} />
     </>
   );
 }

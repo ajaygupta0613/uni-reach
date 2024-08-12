@@ -9,7 +9,6 @@ const OurPlacements = ({ placementsData }) => {
     // Set the first 10 posts in the state
     setPosts(placementsData && placementsData.slice(0, 10));
   }, []);
-  console.log("p", placementsData);
   return (
     <div className={styles.placements__container}>
       <div className={styles.placements__sub}>

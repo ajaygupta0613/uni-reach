@@ -4,7 +4,7 @@ import styles from "@/styles/Header.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-const Header = () => {
+const Header = ({ headerOption }) => {
   const router = useRouter();
   return (
     <div className={`${styles.header__main__container} ${styles.left_border}`}>
@@ -12,9 +12,9 @@ const Header = () => {
         <div className={styles.header__logo__box}>
           <Link href={`/`}>
             <Image
-              src={`/header/logo.png`}
-              width={100}
-              height={100}
+              src={`${headerOption.logo}`}
+              width={2000}
+              height={2000}
               alt="Unireach Logo"
               priority
               className={styles.header__logo}
@@ -24,49 +24,18 @@ const Header = () => {
 
         <div className={styles.header__links__box}>
           <ul className={styles.ul__links}>
-            <li
-              className={`${styles.link} ${
-                router.pathname == "/about-us"
-                  ? styles.active__header__link
-                  : ""
-              }`}
-            >
-              <Link href={`/about-us`}>About Us</Link>
-            </li>
-            <li
-              className={`${styles.link} ${
-                router.pathname == "/services"
-                  ? styles.active__header__link
-                  : ""
-              }`}
-            >
-              <Link href={`/services`}>Services</Link>
-            </li>
-            <li
-              className={`${styles.link} ${
-                router.pathname == "/our-placements"
-                  ? styles.active__header__link
-                  : ""
-              }`}
-            >
-              <Link href={`/our-placements`}>Our Placements</Link>
-            </li>
-            <li
-              className={`${styles.link} ${
-                router.pathname == "/why-us" ? styles.active__header__link : ""
-              }`}
-            >
-              <Link href={`/why-us`}>Why Us</Link>
-            </li>
-            <li
-              className={`${styles.link} ${
-                router.pathname == "/contact-us"
-                  ? styles.active__header__link
-                  : ""
-              }`}
-            >
-              <Link href={`/contact-us`}>Contact Us</Link>
-            </li>
+            {headerOption.menu.map((menus, index) => (
+              <li
+                className={`${styles.link} ${
+                  router.pathname == `${menus.link}`
+                    ? styles.active__header__link
+                    : ""
+                }`}
+                key={index}
+              >
+                <Link href={`${menus.link}`}>{menus.menu_label}</Link>
+              </li>
+            ))}
           </ul>
           <div className={styles.header__social__box}>
             <Image
