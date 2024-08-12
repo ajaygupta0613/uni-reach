@@ -91,14 +91,8 @@
   column-gap: 20px;
 }
 
-.header__social__box img:first-child {
+.header__social__box img {
   width: 25px;
-  height: auto;
-  cursor: pointer;
-}
-
-.header__social__box img:last-child {
-  width: 30px;
   height: auto;
   cursor: pointer;
 }

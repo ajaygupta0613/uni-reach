@@ -17,11 +17,11 @@ export default function Home({ pageData, optionPageData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header headerOption={optionPageData.acf} />
       <ServiceBanner bannerData={pageData.banner} />
       <ServiceSection serviceData={pageData.service_section} />
       <DreamUniversity optionData={optionPageData.acf} />
-      <Footer />
+      <Footer footerOption={optionPageData.acf} />
     </>
   );
 }

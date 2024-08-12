@@ -18,12 +18,12 @@ export default function Home({ pageData, optionPageData, testimonialData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header headerOption={optionPageData.acf} />
       <WhyUsBanner bannerData={pageData.banner} />
       <WhyUsDetails whyUsData={pageData.why_us_details} />
       <Testimonials testimonialData={testimonialData} />
       <DreamUniversity optionData={optionPageData.acf} />
-      <Footer />
+      <Footer footerOption={optionPageData.acf} />
     </>
   );
 }

@@ -27,7 +27,7 @@ export default function Home({ pageData, optionPageData, testimonialData }) {
       <OurTeam teamData={pageData.team} />
       <Testimonials testimonialData={testimonialData} />
       <DreamUniversity optionData={optionPageData.acf} />
-      <Footer />
+      <Footer footerOption={optionPageData.acf} />
     </>
   );
 }

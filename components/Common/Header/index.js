@@ -38,21 +38,17 @@ const Header = ({ headerOption }) => {
             ))}
           </ul>
           <div className={styles.header__social__box}>
-            <Image
-              src={`/header/instagram.svg`}
-              width={30}
-              height={30}
-              alt="Instagram"
-              priority
-            />
-
-            <Image
-              src={`/header/linkedin.svg`}
-              width={30}
-              height={30}
-              alt="Linkedin"
-              priority
-            />
+            {headerOption.social_media.map((social, index) => (
+              <Link href={social.link} key={index}>
+                <Image
+                  src={`${social.Social_Icon}`}
+                  width={25}
+                  height={25}
+                  alt="Instagram"
+                  priority
+                />
+              </Link>
+            ))}
           </div>
         </div>
       </div>
