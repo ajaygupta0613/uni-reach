@@ -17,18 +17,20 @@ const ServiceSection = ({ serviceData }) => {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
+      let brandImagePin = document.getElementById("left-section");
+      let brandImageNotPin = document.getElementById("right-section");
       ScrollTrigger.create({
-        trigger: leftBox.current,
-        start: "top top",
-        endTrigger: rightBox.current,
+        trigger: brandImagePin,
+        start: "-100 top",
+        endTrigger: brandImageNotPin,
         end: "bottom bottom",
         invalidateOnRefresh: true,
-        pin: leftBox.current,
+        pin: brandImagePin,
         markers: true,
       });
     });
     return () => ctx.revert();
-  }, []);
+  });
 
   // ScrollTrigger Refresh
   useEffect(() => {
@@ -64,7 +66,7 @@ const ServiceSection = ({ serviceData }) => {
         </div>
 
         <div className={styles.center__box__content}>
-          <div className={styles.tab_list} ref={rightBox}>
+          <div className={styles.tab_list} id="right-section">
             {serviceData.services.map((tab, index) => (
               <div
                 key={index}
@@ -92,6 +94,7 @@ const ServiceSection = ({ serviceData }) => {
                 className={`${styles.tab_content} ${
                   activeTab === index ? styles.active : styles.hidden
                 }`}
+                id="left-section"
               >
                 <div
                   dangerouslySetInnerHTML={{ __html: tab.description }}

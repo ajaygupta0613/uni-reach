@@ -140,6 +140,7 @@
   flex-direction: column;
   cursor: pointer;
   width: 32%;
+  /* height: 120vh; */
   padding-right: 30px;
 }
 
@@ -156,6 +157,7 @@
 .tab_panel {
   margin-top: 20px;
   width: 68%;
+  height: 100% !important;
   padding-left: 30px;
 }
 

@@ -49,7 +49,7 @@
   list-style: none;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  /* align-items: center; */
   column-gap: 50px;
 }
 
@@ -95,4 +95,125 @@
   width: 25px;
   height: auto;
   cursor: pointer;
+}
+.noScroll {
+  overflow: hidden;
+}
+
+.header__main__container {
+  position: relative;
+}
+
+.header__links__box {
+  display: flex;
+  align-items: center;
+}
+
+.ul__links {
+  list-style: none;
+  display: flex;
+}
+
+.header__social__box {
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile Menu Toggle */
+.mobile__menu__toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu__icon {
+  width: 32px;
+  height: 3px;
+  background-color: var(--white-color);
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+/* Menu Open State */
+.mobile__menu__toggle.open .menu__icon:nth-child(1) {
+  transform: rotate(45deg) translate(9.5px, 0px);
+  margin: 0;
+}
+
+.mobile__menu__toggle.open .menu__icon:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile__menu__toggle.open .menu__icon:nth-child(3) {
+  transform: rotate(-45deg) translate(9.5px, 0px);
+  margin: 0;
+}
+
+/* Mobile Menu Toggle */
+.mobile__menu__toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+/* Mobile Menu */
+@media (max-width: 1024px) {
+  .header__main__container {
+    padding: 0 5%;
+  }
+  .ul__links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 70%;
+    height: 100vh;
+    flex-direction: column;
+    background-color: #fff;
+    transition: left 0.3s ease;
+    z-index: 100;
+    padding: 5%;
+    gap: 20px;
+  }
+
+  .ul__links.open {
+    left: 0;
+  }
+  .ul__links .link a {
+    color: var(--primaryText-color);
+    font-size: 20px;
+  }
+  .header__social__box {
+    display: none;
+  }
+
+  .mobile__menu__toggle {
+    display: flex;
+  }
+
+  /* Overlay for Mobile Menu */
+  .mobile__menu__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 90;
+    display: none;
+  }
+
+  .mobile__menu__overlay.show {
+    opacity: 1;
+    display: block;
+  }
+  .mobile__menu__toggle {
+    display: flex;
+  }
+
+  .ul__links.open + .mobile__menu__toggle {
+    /* .menu__icon {
+      transform-origin: 5px 5px;
+    } */
+  }
 }

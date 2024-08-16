@@ -15,15 +15,15 @@
   --white-color: #ffffff;
   --border-color: #c0c0c0;
 
-  --fontSize-14: 14px;
-  --fontSize-15: 15px;
-  --fontSize-16: 16px;
-  --fontSize-17: 17px;
-  --fontSize-18: 18px;
-  --fontSize-20: 20px;
-  --fontSize-24: 24px;
-  --fontSize-35: 35px;
-  --fontSize-50: 50px;
+  --fontSize-14: 0.875rem;
+  --fontSize-15: 0.938rem;
+  --fontSize-16: 1rem;
+  --fontSize-17: 1.063rem;
+  --fontSize-18: 1.125rem;
+  --fontSize-20: 1.25rem;
+  --fontSize-24: 1.5rem;
+  --fontSize-35: 2.188rem;
+  --fontSize-50: 3.125rem;
 
   --fontWeight-300: 300;
   --fontWeight-400: 400;
@@ -31,10 +31,10 @@
   --fontWeight-600: 600;
   --fontWeight-700: 700;
 
-  --lineHeight-30: 30px;
-  --lineHeight-27: 27px;
-  --lineHeight-67: 67px;
-  --lineHeight-21: 21px;
+  --lineHeight-30: 1.5em;
+  --lineHeight-27: 1.5em;
+  --lineHeight-67: 1.5em;
+  --lineHeight-21: 1.5em;
 }
 
 * {
@@ -96,6 +96,10 @@ a {
 strong {
   font-weight: var(--fontWeight-500);
 }
+.noScroll {
+  overflow: hidden;
+}
+
 /* ============== Tab Section START ============== */
 .react-tabs {
   display: flex;
