@@ -6,7 +6,6 @@ import Footer from "@/components/Common/Footer";
 
 import ServiceBanner from "@/components/ServicePageComponents/Banner";
 import ServiceSection from "@/components/ServicePageComponents/ServiceSection";
-import Test from "@/components/ServicePageComponents/test";
 
 export default function Home({ pageData, optionPageData }) {
   return (
@@ -20,8 +19,7 @@ export default function Home({ pageData, optionPageData }) {
 
       <Header headerOption={optionPageData.acf} />
       <ServiceBanner bannerData={pageData.banner} />
-      {/* <ServiceSection serviceData={pageData.service_section} /> */}
-      <Test serviceData={pageData.service_section} />
+      <ServiceSection serviceData={pageData.service_section} />
       <DreamUniversity optionData={optionPageData.acf} />
       <Footer footerOption={optionPageData.acf} />
     </>

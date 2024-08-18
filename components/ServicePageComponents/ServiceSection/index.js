@@ -1,38 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import styles from "@/styles/Service.module.css";
 import "react-tabs/style/react-tabs.css";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import Script from "next/script";
 
 const ServiceSection = ({ serviceData }) => {
-  const tabListRef = useRef(null); // Reference for TabList (leftBox)
-  const tabPanelsRef = useRef(null); // Reference for TabPanel (rightBox)
-
-  useEffect(() => {
-    const isDesktop = window.innerWidth > 1024;
-    if (isDesktop && tabListRef.current && tabPanelsRef.current) {
-      const ctx = gsap.context(() => {
-        ScrollTrigger.create({
-          trigger: tabListRef.current,
-          start: "top top",
-          end: () =>
-            tabPanelsRef.current.scrollHeight - tabListRef.current.offsetHeight,
-          pin: true,
-          pinSpacing: false,
-          scrub: true,
-          markers: true,
-          invalidateOnRefresh: true,
-        });
-      });
-
-      return () => ctx.revert();
-    }
-  }, [tabListRef, tabPanelsRef]); // Depend on refs
-
   return (
     <div
       className={`${styles.about__section__container} ${styles.left_border}`}
@@ -59,9 +32,7 @@ const ServiceSection = ({ serviceData }) => {
 
         <div className={styles.center__box__content}>
           <Tabs>
-            <TabList ref={tabListRef}>
-              {" "}
-              {/* Attach ref to TabList */}
+            <TabList>
               {serviceData.services.map((tab, index) => (
                 <Tab key={index}>
                   <Image
@@ -76,18 +47,14 @@ const ServiceSection = ({ serviceData }) => {
               ))}
             </TabList>
 
-            <div ref={tabPanelsRef}>
-              {" "}
-              {/* Attach ref to container holding all TabPanels */}
-              {serviceData.services.map((tab, index) => (
-                <TabPanel key={index}>
-                  <div
-                    className={`${styles.service_tab_content}`}
-                    dangerouslySetInnerHTML={{ __html: tab.description }}
-                  />
-                </TabPanel>
-              ))}
-            </div>
+            {serviceData.services.map((tab, index) => (
+              <TabPanel key={index}>
+                <div
+                  className={`${styles.service_tab_content}`}
+                  dangerouslySetInnerHTML={{ __html: tab.description }}
+                />
+              </TabPanel>
+            ))}
           </Tabs>
         </div>
       </div>

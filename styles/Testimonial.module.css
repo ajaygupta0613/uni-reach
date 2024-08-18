@@ -133,3 +133,20 @@
   position: absolute;
   top: 0;
 }
+@media (min-width: 768px) and (max-width: 1024px) {
+  .our__testimonials__container {
+    padding: 50px 5%;
+  }
+  .our__testimonials__sub {
+    padding: 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .left__box__content__container,
+  .our__testimonials__right {
+    width: 100%;
+  }
+  .arrow_vector__svg {
+    left: -13%;
+  }
+}

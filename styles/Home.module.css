@@ -384,7 +384,8 @@
   .why__vector {
     left: -7%;
   }
-  .why__us__container {
+  .why__us__container,
+  .our__service__sub {
     padding: 50px 5%;
   }
   .why__us__sub {
@@ -402,5 +403,21 @@
   .why__desc {
     padding: 0;
     max-width: 100%;
+  }
+  .why__btn {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  .why__us__img {
+    border-radius: 20px;
+  }
+  .our__service__sub {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .left__box__content__container,
+  .our__service__right {
+    width: 100%;
+    padding: 0;
   }
 }
