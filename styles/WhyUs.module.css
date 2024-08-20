@@ -76,3 +76,24 @@
   position: absolute;
   top: 0;
 }
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about__section__container {
+    padding: 50px 5%;
+  }
+  .right_border::before,
+  .left_border::after {
+    display: none;
+  }
+  .why__us__section__sub {
+    padding: 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .left__box__content,
+  .center__box__content {
+    width: 100%;
+  }
+  .about__section__text {
+    padding: 0;
+  }
+}

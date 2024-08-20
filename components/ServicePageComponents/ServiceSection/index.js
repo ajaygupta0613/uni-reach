@@ -1,9 +1,6 @@
 import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import styles from "@/styles/Service.module.css";
-import "react-tabs/style/react-tabs.css";
 import Image from "next/image";
-import Script from "next/script";
 
 const ServiceSection = ({ serviceData }) => {
   return (
@@ -31,31 +28,24 @@ const ServiceSection = ({ serviceData }) => {
         </div>
 
         <div className={styles.center__box__content}>
-          <Tabs>
-            <TabList>
-              {serviceData.services.map((tab, index) => (
-                <Tab key={index}>
-                  <Image
-                    src={tab.icon}
-                    width={50}
-                    height={50}
-                    alt={`${tab.title} Icon`}
-                    className={styles.service__icons}
-                  />
-                  {tab.title}
-                </Tab>
-              ))}
-            </TabList>
-
-            {serviceData.services.map((tab, index) => (
-              <TabPanel key={index}>
-                <div
-                  className={`${styles.service_tab_content}`}
-                  dangerouslySetInnerHTML={{ __html: tab.description }}
+          {serviceData.services.map((service, index) => (
+            <div key={index} className={styles.service__item}>
+              <div className={styles.service__title__sec}>
+                <Image
+                  src={service.icon}
+                  width={50}
+                  height={50}
+                  alt={`${service.title} Icon`}
+                  className={styles.service__icons}
                 />
-              </TabPanel>
-            ))}
-          </Tabs>
+                <h3 className={styles.service__title}>{service.title}</h3>{" "}
+              </div>
+              <div
+                className={styles.service__description}
+                dangerouslySetInnerHTML={{ __html: service.description }}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

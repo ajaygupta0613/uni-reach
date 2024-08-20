@@ -170,3 +170,24 @@
 .contact_info_list {
   margin-top: 15px;
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .footer__sub {
+    padding: 50px 5%;
+    flex-wrap: wrap;
+    row-gap: 50px;
+  }
+  .border__line__left,
+  .border__line__right {
+    display: none;
+  }
+  .footer__box {
+    width: calc(50% - 1px);
+  }
+  .footer__box:nth-child(5) {
+    padding-left: 0 !important;
+  }
+  .copy__sub__box {
+    padding: 0 5%;
+  }
+}
